@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+    <!-- Navbar -->
+    <%- include('../partials/nav.ejs') %>
+    <p>
+        <%= invoice.client.name %>
+        <br>
+        <%= invoice.invoice.date %>
+    </p>
+    <!-- <a href="/new-invoice?id=<%= invoice._id %>">edit</a> -->
+    <button>edit</button>
+    <button id="delete" data-for="<%= invoice._id %> ">delete</button>
+
+    <script>
+        const deleteBtn = document.querySelector('#delete');
+
+        deleteBtn.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.for;
+            const endpoint = `/invoice/${id}`;
+
+            fetch(endpoint, {method: 'DELETE'})
+                .then((res) => res.json())
+                .then((data) => {
+                    window.location = data.redirect;
+                })
+                .catch((err) => console.log(err))
+        })
+    </script>
+</body>
+</html>

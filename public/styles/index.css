@@ -1,0 +1,153 @@
+header {
+	justify-content: space-between;
+}
+
+h1 {
+	font-size: 1.7rem;
+	margin-bottom: 0.2rem;
+}
+
+.new-btn,
+header,
+.right {
+	display: flex;
+	align-items: center;
+}
+
+.filter {
+	margin-right: 2rem;
+	position: relative;
+	cursor: pointer;
+}
+
+.filter img {
+	transition: transform 0.5s;
+}
+
+.filter.active img {
+	transform: rotateX(180deg);
+}
+
+.list {
+	position: absolute;
+	width: 125px;
+	background-color: var(--secondary-bg);
+	border-radius: 7px;
+	top: calc(100% + 10px);
+	left: 50%;
+	transform: translateX(-50%) scale(1, 0);
+	transition: transform 0.5s;
+	overflow: hidden;
+}
+
+.list.active {
+	transform: translateX(-50%) scale(1);
+}
+
+.list button {
+	display: block;
+	width: 100%;
+	border: none;
+	background-color: transparent;
+	color: inherit;
+	padding: 0.8rem 0.5rem;
+	font-size: 0.95rem;
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+}
+
+.list button.active {
+	background-color: var(--lpurple);
+}
+
+.new-btn {
+	background-color: var(--lpurple);
+	padding: 5px 12px 5px 7px;
+	border-radius: 50px;
+	text-decoration: none;
+	color: inherit;
+}
+
+.new-btn button {
+	border: none;
+	background-color: var(--primary-clr);
+	background-image: url('../svgs/plus.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+	padding: 20px;
+	margin-right: 5px;
+}
+
+.invoices {
+	margin-top: 2rem;
+}
+
+.invoice {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--secondary-bg);
+	text-decoration: none;
+	color: inherit;
+	padding: 2.5rem 2rem;
+	border-radius: 6px;
+	transition: border 0.5s;
+	border: 1px solid transparent;
+}
+.invoice:hover {
+	border: 1px solid var(--lpurple);
+}
+.hash {
+	color: #7e88c3;
+}
+.total {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.end {
+	display: flex;
+	align-items: center;
+}
+
+.status {
+	display: flex;
+	align-items: center;
+	color: var(--pending);
+	background-color: var(--pending-bg);
+	padding: 0.75rem 1rem;
+	border-radius: 6px;
+	text-transform: capitalize;
+}
+
+.status.paid {
+	color: var(--paid);
+	background-color: var(--paid-bg);
+}
+
+.status.paid span {
+	background-color: var(--paid);
+}
+
+.status span {
+	display: block;
+	background-color: var(--pending);
+	width: 8px;
+	height: 8px;
+	margin-right: 7px;
+	border-radius: 50%;
+}
+
+.arrow {
+	margin-left: 20px;
+	width: 10px;
+	height: 12px;
+}
+
+@media (max-width: 768px) {
+	h1 {
+		font-size: 1.4rem;
+	}
+}

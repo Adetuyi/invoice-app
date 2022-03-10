@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <!-- Navbar -->
+    <%- include('../partials/nav.ejs') %> 
+
+    <h2>Make Invoice</h2>
+
+    <% if(invoice) { %>
+        <form id="edit-form">
+            <div class="from">
+                <h4>Bill from</h4>
+                <label for="from_address">Street Address</label>
+                <input type="text" name="from_address" value="<%= invoice.from.address %>" required><br>
+        
+                <label for="from_city">City</label>
+                <input type="text" name="from_city"  value="<%= invoice.from.city %>" required><br>
+        
+                <label for="from_post_code">Post Code</label>
+                <input type="text" name="from_post_code" value="<%= invoice.from.postCode %>" required><br>
+        
+                <label for="from_country">Country</label>
+                <input type="text" name="from_country" value="<%= invoice.from.country %>" required><br>
+            </div>
+            <div class="to">
+                <h4>Bill to</h4>
+                <label for="name">Name</label>
+                <input type="text" name="name" value="<%= invoice.client.name %>" required><br>
+        
+                <label for="email">Email</label>
+                <input type="email" name="email" value="<%= invoice.client.email %>" required><br>
+        
+                <label for="address">Street Address</label>
+                <input type="text" name="address" value="<%= invoice.client.address %>" required><br>
+        
+                <label for="city">City</label>
+                <input type="text" name="city" value="<%= invoice.client.city %>" required><br>
+        
+                <label for="post_code">Post Code</label>
+                <input type="text" name="post_code" value="<%= invoice.client.postCode %>" required><br>
+        
+                <label for="country">Country</label>
+                <input type="text" name="country" value="<%= invoice.client.country %>" required><br>
+        
+                <label for="inv_date">Invoice Date</label>
+                <input type="date" name="inv_date" value="<%= date %>" required><br>
+        
+                <select name="term">
+                    <option value="1">Net 1 Day</option>
+                    <option value="7">Net 7 Days</option>
+                </select><br>
+        
+                <label for="description">Project / Description</label>
+                <input type="text" name="description" value="<%= invoice.invoice.description %>" required><br>
+            </div>
+            <div class="item">
+                <label for="item_name">Item Name</label>
+                <input type="text" name="item_name" value="<%= invoice.items.name %>" required><br>
+        
+                <label for="qty">Qty</label>
+                <input type="number" name="qty"  value="<%= invoice.items.qty %>" required><br>
+        
+                <label for="price">Price</label>
+                <input type="number" name="price"  value="<%= invoice.items.price %>" required><br>
+        
+                <label for="total">Total</label>
+                <input type="number" name="total" disabled><br>
+        
+                <button type="button">Add a new item</button>
+            </div>
+        
+            <button type="button">Cancel</button>
+            <button type="submit">Save changes</button>
+        
+        </form>
+    <% }else{ %> 
+        <form action="/invoice" method="post">
+            <div class="from">
+                <h4>Bill from</h4>
+                <label for="from_address">Street Address</label>
+                <input type="text" name="from_address" required><br>
+        
+                <label for="from_city">City</label>
+                <input type="text" name="from_city" required><br>
+        
+                <label for="from_post_code">Post Code</label>
+                <input type="text" name="from_post_code" required><br>
+        
+                <label for="from_country">Country</label>
+                <input type="text" name="from_country" required><br>
+            </div>
+            <div class="to">
+                <h4>Bill to</h4>
+                <label for="name">Name</label>
+                <input type="text" name="name" required><br>
+        
+                <label for="email">Email</label>
+                <input type="email" name="email" required><br>
+        
+                <label for="address">Street Address</label>
+                <input type="text" name="address" required><br>
+        
+                <label for="city">City</label>
+                <input type="text" name="city" required><br>
+        
+                <label for="post_code">Post Code</label>
+                <input type="text" name="post_code" required><br>
+        
+                <label for="country">Country</label>
+                <input type="text" name="country" required><br>
+        
+                <label for="inv_date">Invoice Date</label>
+                <input type="date" name="inv_date" required><br>
+        
+                <select name="term">
+                    <option value="1">Net 1 Day</option>
+                    <option value="7">Net 7 Days</option>
+                </select><br>
+        
+                <label for="description">Project / Description</label>
+                <input type="text" name="description" required><br>
+            </div>
+            <div class="item">
+                <label for="item_name">Item Name</label>
+                <input type="text" name="item_name" required><br>
+        
+                <label for="qty">Qty</label>
+                <input type="number" name="qty" required><br>
+        
+                <label for="price">Price</label>
+                <input type="number" name="price" required><br>
+        
+                <label for="total">Total</label>
+                <input type="number" name="total" disabled><br>
+        
+                <button type="button">Add a new item</button>
+            </div>
+        
+            <button type="button">Discard</button>
+            <button type="button">Save as draft</button>
+            <button type="submit">Save & end</button>
+        
+        </form>
+    <% } %>  
+
+    <script>
+        const putForm = document.querySelector('#edit-form');
+
+        putForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = Object. fromEntries(new FormData(e.currentTarget).entries());
+
+            // const o = {}
+            // new FormData(e.currentTarget).forEach((val, key) => o[key] = val);
+
+            // console.log(o);
+
+            fetch(`/invoice/${formData._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    // window.location = data.redirect
+                    console.log(data);
+                })
+                .catch((err) => console.log(err));
+        });
+    </script>
+</body>
+
+</html>

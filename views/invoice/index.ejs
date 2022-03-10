@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Head -->
-<%- include('../partials/head.ejs') %> 
+<%- include('../partials/head.ejs') %>  
+<head>
+    <link rel="stylesheet" href="/styles/index.css">
+</head>
 
 <body>
-    <% if(invoices.length> 0){ %>
-        <%invoices.forEach(invoice=> {%>
-            <p>
-                <%= invoice.body %>
-            </p>
+    <!-- Navbar -->
+    <%- include('../partials/nav.ejs') %>
+
+    <main>
+        <header>
+            <div class="left">
+                <h1>Invoices</h1>
+                <p class="g"><%= invoices.length %> invoices</p>
+            </div>
+            <div class="right">
+                <div id="filter" class="filter">
+                    <span>Filter <span class="h">by status</span><img src="/svgs/arrow-down.svg" alt="arrow down"></span>
+                    <div id="list" class="list">
+                        <button>Draft</button>
+                        <button>Pending</button>
+                        <button>Paid</button>
+                    </div>
+                </div>
+                <a href="/new-invoice" class="new-btn">
+                    <button></button>
+                     <p>New <span class="h">invoice</span></p>
+                </a>
+            </div>
+        </header>
+        <section class="invoices">
+            <% if(invoices.length > 0){ %>
+                <%invoices.forEach(invoice=> {%>
+                    <a href='/invoice/<%= invoice._id %>' class="invoice">
+                        <div><span class="hash">#</span>ABCDEF1</div>
+
+                        <div class="g">Due <%= invoice.invoice.date %></div>
+
+                        <div class="g"><%= invoice.client.name %> </div>
+
+                        <div class="total">$<%= invoice.items.price*invoice.items.qty %> </div>
+
+                        <div class="end">
+                            <div class="status <%= invoice.status %>"><span></span><%= invoice.status %> </div>
+                            <img class="arrow" src="/svgs/arrow-right.svg" alt="right arrow">
+                        </div>
+                    </a>
             <% })} else{ %>
-                <p>No invoice yet</p>
-                <% } %>
+                    <p>No invoice yet</p>
+            <% } %>      
+        </section>
+    </main>
+
+    <script>
+        const filter = document.querySelector('#filter')
+        const list = document.querySelector('#list')
+
+        filter.addEventListener('click', (e) => {
+            list.classList.toggle('active');
+
+            e.currentTarget.classList.toggle('active')
+        })
+    </script>
 </body>
 </html>
