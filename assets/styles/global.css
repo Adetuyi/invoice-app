@@ -25,7 +25,7 @@ body {
 	background-color: var(--primary-bg);
 	color: var(--primary-clr);
 	font-family: 'Spartan', sans-serif;
-	font-size: 0.9rem;
+	font-size: 0.77rem;
 	font-weight: 600;
 }
 nav {
@@ -44,7 +44,8 @@ nav .aside {
 	display: flex;
 	align-items: center;
 }
-nav .aside div {
+nav .aside .mode,
+nav .aside > a {
 	padding: 0 17px;
 }
 nav hr {
@@ -54,13 +55,16 @@ nav .profile {
 	width: 40px;
 	border-radius: 50%;
 }
-.g {
-	color: var(--secondary-clr);
-}
 main {
 	max-width: 1050px;
 	margin: 0 auto;
 	padding: 3rem 3rem 3rem;
+}
+.g {
+	color: var(--secondary-clr);
+}
+.hidden {
+	display: none;
 }
 
 @media (min-width: 1200px) {
@@ -78,7 +82,8 @@ main {
 		flex-direction: column;
 		width: 100%;
 	}
-	nav .aside div {
+	nav .aside .mode,
+	nav .aside > a {
 		padding: 17px 0;
 	}
 	nav hr {
@@ -89,13 +94,15 @@ main {
 }
 
 @media (max-width: 768px) {
-	body {
-		font-size: 0.8rem;
-	}
 	main {
-		padding: 3rem 2rem 3rem;
+		padding: 2rem 2rem 3rem;
 	}
 	.h {
 		display: none;
+	}
+}
+@media (max-width: 425px) {
+	main {
+		padding: 2rem 1rem 2rem;
 	}
 }

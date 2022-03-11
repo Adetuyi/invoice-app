@@ -4,6 +4,7 @@
 <%- include('../partials/head.ejs') %>  
 <head>
     <link rel="stylesheet" href="/styles/index.css">
+    <script src="/scripts/index.js" defer></script>
 </head>
 
 <body>
@@ -31,15 +32,16 @@
                 </a>
             </div>
         </header>
+
         <section class="invoices">
             <% if(invoices.length > 0){ %>
                 <%invoices.forEach(invoice=> {%>
-                    <a href='/invoice/<%= invoice._id %>' class="invoice">
-                        <div><span class="hash">#</span>ABCDEF1</div>
+                    <a href='/invoice/<%= invoice._id %>' class="invoice desktop">
+                        <div class="inv-num"><span class="hash">#</span>ABCDEF1</div>
 
-                        <div class="g">Due <%= invoice.invoice.date %></div>
+                        <div class="g date">Due <%= invoice.invoice.date %></div>
 
-                        <div class="g"><%= invoice.client.name %> </div>
+                        <div class="g name"><%= invoice.client.name %> </div>
 
                         <div class="total">$<%= invoice.items.price*invoice.items.qty %> </div>
 
@@ -48,21 +50,33 @@
                             <img class="arrow" src="/svgs/arrow-right.svg" alt="right arrow">
                         </div>
                     </a>
+                    <a href='/invoice/<%= invoice._id %>' class="invoice mobile">
+                        <div>
+                            <div class="inv-num"><span class="hash">#</span>ABCDEF1</div>
+
+                            <div class="g name">
+                                <%= invoice.client.name %>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div class="g date">Due <%= invoice.invoice.date %>
+                                </div>
+                            
+                                <div class="total">$<%= invoice.items.price*invoice.items.qty %>
+                                </div>
+                            </div>
+
+                            <div class="status <%= invoice.status %>"><span></span>
+                                <%= invoice.status %>
+                            </div>
+                        </div>
+                    
+                    </a>
             <% })} else{ %>
                     <p>No invoice yet</p>
-            <% } %>      
+            <% } %>
         </section>
     </main>
-
-    <script>
-        const filter = document.querySelector('#filter')
-        const list = document.querySelector('#list')
-
-        filter.addEventListener('click', (e) => {
-            list.classList.toggle('active');
-
-            e.currentTarget.classList.toggle('active')
-        })
-    </script>
 </body>
 </html>

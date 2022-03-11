@@ -1,0 +1,71 @@
+.back {
+	text-decoration: none;
+	color: inherit;
+	font-weight: 600;
+}
+.back span {
+	margin-left: 0.7rem;
+}
+h1 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 2rem 0;
+}
+h4 {
+	color: var(--lpurple);
+	margin-bottom: 1.1rem;
+}
+label,
+input {
+	display: block;
+}
+label {
+	color: #888eb0;
+}
+input {
+	width: 100%;
+	border: none;
+	border-radius: 5px;
+	background-color: var(--secondary-bg);
+	padding: 0.95rem 1rem;
+	margin-top: 0.7rem;
+	margin-bottom: 1.5rem;
+	color: inherit;
+	font-family: inherit;
+	font-weight: 600;
+	font-size: inherit;
+}
+.from {
+	margin-bottom: 2.7rem;
+}
+.group {
+	display: flex;
+	gap: 1.5rem;
+}
+.inp-group {
+	width: 100%;
+}
+.item-group {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+.item-group > * {
+	flex: 1;
+}
+.thrash {
+	flex: none;
+	cursor: pointer;
+}
+.thrash path {
+	transition: fill 0.2s;
+}
+.thrash:hover path {
+	fill: #dc3545;
+}
+.total {
+	color: #888eb0;
+	padding: 0.95rem 0;
+	margin-top: 0.7rem;
+	margin-bottom: 1.5rem;
+}

@@ -110,6 +110,7 @@ const invoice_delete = (req, res) => {
 const invoice_edit = (req, res) => {
 	const body = req.body;
 	const id = req.params.id;
+	console.log('BODY:', body);
 
 	const invoice = new Invoice({
 		status: 'pending',
@@ -139,11 +140,11 @@ const invoice_edit = (req, res) => {
 		},
 	});
 
-	Invoice.findByIdAndUpdate(id, invoice)
-		.then((result) => {
-			res.redirect(`/invoice/${id}`);
-		})
-		.catch((err) => console.log(err));
+	Invoice.findByIdAndUpdate(id, { status: 'paid' });
+	// .then((result) => {
+	// 	res.redirect(`/invoice/${id}`);
+	// })
+	// .catch((err) => console.log(err));
 };
 
 module.exports = {
