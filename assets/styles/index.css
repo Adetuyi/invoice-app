@@ -80,6 +80,22 @@ header,
 	padding: 20px;
 	margin-right: 10px;
 }
+.no-inv {
+	width: max-content;
+	text-align: center;
+	margin: 0 auto;
+	display: grid;
+	place-items: center;
+	min-height: 60vh;
+}
+.no-inv h3 {
+	font-size: 1.2rem;
+	margin: 2.5rem 0 1rem;
+}
+.no-inv p {
+	width: 23ch;
+	line-height: 1.5;
+}
 
 .invoices {
 	margin-top: 2rem;
@@ -101,9 +117,6 @@ header,
 .invoice:hover {
 	border: 1px solid var(--lpurple);
 }
-.hash {
-	color: #7e88c3;
-}
 .total {
 	font-size: 1rem;
 	font-weight: 700;
@@ -112,6 +125,8 @@ header,
 .end {
 	display: flex;
 	align-items: center;
+	justify-content: end;
+	min-width: 131px;
 }
 .mobile {
 	display: none;
@@ -127,34 +142,6 @@ header,
 }
 .mobile .date {
 	margin-bottom: 0.7rem;
-}
-
-.status {
-	display: flex;
-	align-items: center;
-	color: var(--pending);
-	background-color: var(--pending-bg);
-	padding: 0.75rem 1rem;
-	border-radius: 6px;
-	text-transform: capitalize;
-}
-
-.status.paid {
-	color: var(--paid);
-	background-color: var(--paid-bg);
-}
-
-.status.paid span {
-	background-color: var(--paid);
-}
-
-.status span {
-	display: block;
-	background-color: var(--pending);
-	width: 8px;
-	height: 8px;
-	margin-right: 7px;
-	border-radius: 50%;
 }
 
 .arrow {
@@ -201,8 +188,5 @@ header,
 	}
 	.mobile {
 		padding: 1.6rem 1rem;
-	}
-	.status {
-		padding: 0.75rem 0.7rem;
 	}
 }

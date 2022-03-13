@@ -21,9 +21,11 @@
                 <div id="filter" class="filter">
                     <span>Filter <span class="h">by status</span><img src="/svgs/arrow-down.svg" alt="arrow down"></span>
                     <div id="list" class="list">
-                        <button>Draft</button>
-                        <button>Pending</button>
-                        <button>Paid</button>
+                        <button data-filter_for="draft" id="draft">Draft</button>
+
+                        <button data-filter_for="pending" id="pending">Pending</button>
+
+                        <button data-filter_for="paid" id="paid">Paid</button>
                     </div>
                 </div>
                 <a href="/new-invoice" class="new-btn">
@@ -35,46 +37,65 @@
 
         <section class="invoices">
             <% if(invoices.length > 0){ %>
-                <%invoices.forEach(invoice=> {%>
+                <%invoices.forEach(invoice => {%>
                     <a href='/invoice/<%= invoice._id %>' class="invoice desktop">
                         <div class="inv-num"><span class="hash">#</span>ABCDEF1</div>
 
-                        <div class="g date">Due <%= invoice.invoice.date %></div>
+                        <div class="g date">Due <%= invoice.invoice.formattedDueDate || 'date not selected' %></div>
 
-                        <div class="g name"><%= invoice.client.name %> </div>
+                        <div class="g name"><%= invoice.client.name || 'No name entered' %> </div>
 
-                        <div class="total">$<%= invoice.items.price*invoice.items.qty %> </div>
+                        <div class="total">
+                            <% if(invoice.invoice.total) { %>
+                                $ <%= invoice.invoice.total %>
+                            <% } else {%>
+                                 No total 
+                            <% } %>
+                        </div>
 
                         <div class="end">
                             <div class="status <%= invoice.status %>"><span></span><%= invoice.status %> </div>
                             <img class="arrow" src="/svgs/arrow-right.svg" alt="right arrow">
                         </div>
                     </a>
+
                     <a href='/invoice/<%= invoice._id %>' class="invoice mobile">
                         <div>
                             <div class="inv-num"><span class="hash">#</span>ABCDEF1</div>
 
                             <div class="g name">
-                                <%= invoice.client.name %>
+                                <%= invoice.client.name || 'No name entered' %>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <div class="g date">Due <%= invoice.invoice.date %>
+                                <div class="g date">Due <%= invoice.invoice.formattedDueDate || 'date not selected' %>
                                 </div>
                             
-                                <div class="total">$<%= invoice.items.price*invoice.items.qty %>
+                                <div class="total">
+                                    <% if(invoice.invoice.total) { %>
+                                        $ <%= invoice.invoice.total %>
+                                    <% } else {%>
+                                        No total
+                                    <% } %>
                                 </div>
                             </div>
 
-                            <div class="status <%= invoice.status %>"><span></span>
+                            <div class="status <%= invoice.status %>">
+                                <span></span>
                                 <%= invoice.status %>
                             </div>
                         </div>
                     
                     </a>
             <% })} else{ %>
-                    <p>No invoice yet</p>
+                    <div class="no-inv">
+                        <div>
+                            <img src="/svgs/illustration.svg" alt="woman shouting">
+                            <h3>There is nothing here</h3>
+                            <p>Create an invoice by clicking the <b>New Invoice button and get started</b></p>
+                        </div>
+                    </div>
             <% } %>
         </section>
     </main>

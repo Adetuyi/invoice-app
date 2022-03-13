@@ -1,0 +1,152 @@
+<form action="/invoice" method="post" id="create-form">
+    <div class="from">
+        <h4>Bill from</h4>
+        <label for="from_address">Street Address</label>
+        <input type="text" name="from_address" required>
+
+        <div class="group">
+            <div class="inp-group">
+                <label for="from_city">City</label>
+                <input type="text" name="from_city" required>
+            </div>
+
+            <div class="inp-group">
+                <label for="from_post_code">Post Code</label>
+                <input type="text" name="from_post_code" required>
+            </div>
+        </div>
+
+        <label for="from_country">Country</label>
+        <input type="text" name="from_country" required>
+    </div>
+    
+    <div class="to">
+        <h4>Bill to</h4>
+        <label for="name">Name</label>
+        <input type="text" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+
+        <label for="address">Street Address</label>
+        <input type="text" name="address" required>
+
+        <div class="group">
+            <div class="inp-group">
+                <label for="city">City</label>
+                <input type="text" name="city" required>
+            </div>
+
+            <div class="inp-group">
+                <label for="post_code">Post Code</label>
+                <input type="text" name="post_code" required>
+            </div>
+        </div>
+
+        <label for="country">Country</label>
+        <input type="text" name="country" required>
+
+        <div class="group">
+            <div class="inp-group">
+                <label for="inv_date">Invoice Date</label>
+                <input type="date" name="inv_date" id="date" required>
+            </div>
+        
+            <div class="inp-group">
+                <label for="term">Payment Terms</label>
+                <div class="selectCon">
+                    <div class="select">
+                        <span>Select Payment Status</span>
+                        <img src="/svgs/arrow-down.svg" alt="arrow down">
+                    </div>
+
+                    <div class="options">
+                        <div class="option" data-value="1">Net 1 Day</div>
+                        <div class="option" data-value="7">Net 7 Days</div>
+                        <div class="option" data-value="14">Net 14 Days</div>
+                        <div class="option" data-value="30">Net 30 Days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <label for="description">Project / Description</label>
+        <input type="text" name="description" required>
+    </div>
+    
+    <div class="items">
+        <h3>Item List</h3>
+
+        <div class="item">
+            <label for="item_one_name">Item Name</label>
+            <input type="text" class="item-name" name="item_one_name">
+            
+            <div class="item-group">
+                <div>
+                    <label for="qty_one">Qty</label>
+                    <input type="number" value="0" class="qty" name="qty_one" min="0">
+                </div>
+
+                <div>
+                    <label for="price_one">Price</label>
+                    <input type="number" value="0.00" class="price" name="price_one" min="0">
+                </div>
+
+                <div>
+                    <label for="total">Total</label>
+                    <div id="total" class="total">0.00</div>
+                </div>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" class="thrash">
+                    <path
+                        d="M11.583 3.556v10.666c0 .982-.795 1.778-1.777 1.778H2.694a1.777 1.777 0 01-1.777-1.778V3.556h10.666zM8.473 0l.888.889h3.111v1.778H.028V.889h3.11L4.029 0h4.444z"
+                        fill="#888EB0" fill-rule="nonzero" />
+                    </svg>
+            </div>
+        </div>
+        
+        <div id="second-item" class="item hidden">
+            <label for="item_two_name">Item Name</label>
+            <input type="text" class="item-name" name="item_two_name">
+            
+            <div class="item-group">
+                <div>
+                    <label for="qty_two">Qty</label>
+                    <input type="number" value="0" class="qty" name="qty_two" min="0">
+                </div>
+
+                <div>
+                    <label for="price_two">Price</label>
+                    <input type="number" value="0.00" class="price" name="price_two" min="0">
+                </div>
+
+                <div>
+                    <label for="total">Total</label>
+                    <div id="total" class="total">0.00</div>
+                </div>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" class="thrash">
+                    <path
+                    d="M11.583 3.556v10.666c0 .982-.795 1.778-1.777 1.778H2.694a1.777 1.777 0 01-1.777-1.778V3.556h10.666zM8.473 0l.888.889h3.111v1.778H.028V.889h3.11L4.029 0h4.444z"
+                        fill="#888EB0" fill-rule="nonzero" />
+                    </svg>
+                </div>
+        </div>
+        
+        <button type="button" id="add-item" class="add-item">+ Add a new item</button>
+    </div>
+
+    <!-- Error -->
+    <div id="error" class="error">
+        <div class="item-err hidden">
+            - An item must be added
+        </div>
+        <div class="terms-err hidden">
+            - A payment term must be selected
+        </div>
+    </div>
+
+    <input type="hidden" name="status" id="status">
+    <input type="hidden" name="terms" value="0" id="terms">
+    <button type="submit" class="hidden" id="submit-create">Submit</button>
+</form>

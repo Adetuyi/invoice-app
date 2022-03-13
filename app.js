@@ -19,11 +19,11 @@ mongoose
 	.connect(uri)
 	.then((result) => {
 		console.log('connected to db');
+		app.listen(3000);
 	})
 	.catch((err) => {
 		console.log(err);
 	});
-app.listen(3000);
 
 // Request handlers
 // Invoices routes

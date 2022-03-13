@@ -9,8 +9,10 @@ router.get('/new-invoice', invControllers.invoice_create_get);
 router.post('/invoice', invControllers.invoice_post);
 
 // Editting
-// NOT WORKING
-router.put('/invoice/:id', invControllers.invoice_edit);
+router.post('/invoice/:id', invControllers.invoice_edit);
+
+// Mark as paid
+router.put('/invoice/:id', invControllers.invoice_update);
 
 router.get('/invoice/:id', invControllers.invoice_get);
 

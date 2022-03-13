@@ -2,11 +2,40 @@
 <html lang="en">
 <!-- Head -->
 <%- include('./partials/head.ejs') %> 
+<head>
+    <link rel="stylesheet" href="/styles/notfound.css">
+</head>
 
 <body>
     <!-- Navbar -->
     <%- include('./partials/nav.ejs') %>
 
-    <p>Oops! page not foud. :)</p>
+    <main>
+        <div>
+            <h1>You found my hiding space</h1>
+            <p>Oh no I've been found out</p>
+            <p>Gotta find a new hiding location</p>
+            <div class="redirect">Redirecting to homepage in <span id="timer">7</span></div>
+            <a href="/">Homepage</a>
+        </div>
+        <!-- Background image: <a href='https://www.freepik.com/psd/3d-woman'>3d woman psd created by freepik - www.freepik.com</a> -->
+    </main>
+
+    <script>
+        const timerDom = document.querySelector('#timer')
+        let timer = 7;
+
+        const countDown = setInterval(() => {
+            timer--;
+            timerDom.textContent = timer;
+
+            if(timer === 0) {
+                clearInterval(countDown);
+            }
+        }, 1000)
+        setTimeout(() => {
+            location = '/'
+        }, 7000)
+    </script>
 </body>
 </html>

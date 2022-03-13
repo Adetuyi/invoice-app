@@ -8,12 +8,17 @@
 	--secondary-clr: #dfe3fa;
 
 	--lpurple: #7c5dfa;
+	--lred: #a04146;
+	--del: #ec5757;
 
 	--pending: #fe8f00;
 	--pending-bg: rgba(255, 145, 0, 0.288);
 
 	--paid: #33d59f;
 	--paid-bg: rgba(51, 213, 159, 0.336);
+
+	--draft: #fdfdfd;
+	--draft-bg: rgba(151, 151, 151, 0.145);
 }
 * {
 	margin: 0;
@@ -60,11 +65,97 @@ main {
 	margin: 0 auto;
 	padding: 3rem 3rem 3rem;
 }
+span {
+	font-size: inherit;
+}
 .g {
 	color: var(--secondary-clr);
 }
+.hash {
+	color: #7e88c3;
+}
 .hidden {
 	display: none;
+}
+
+.filtered-out {
+	display: none !important;
+}
+.back {
+	text-decoration: none;
+	color: inherit;
+	font-weight: 600;
+}
+.back span {
+	margin-left: 0.7rem;
+}
+
+.status {
+	width: max-content;
+	display: flex;
+	align-items: center;
+	color: var(--pending);
+	background-color: var(--pending-bg);
+	padding: 0.75rem 1rem;
+	border-radius: 6px;
+	text-transform: capitalize;
+}
+.status.paid {
+	color: var(--paid);
+	background-color: var(--paid-bg);
+}
+.status.paid span {
+	background-color: var(--paid);
+}
+.status.draft {
+	color: var(--draft);
+	background-color: var(--draft-bg);
+}
+
+.status.draft span {
+	background-color: var(--draft);
+}
+
+.status span {
+	display: block;
+	background-color: var(--pending);
+	width: 8px;
+	height: 8px;
+	margin-right: 7px;
+	border-radius: 50%;
+}
+.btns button {
+	background-color: #373b53;
+	padding: 0.9rem 1.2rem;
+	color: #fff;
+	border: none;
+	border-radius: 50px;
+	font-weight: 600;
+	font-family: inherit;
+	font-size: inherit;
+	cursor: pointer;
+}
+.btns .purple {
+	margin-left: 0.3rem;
+	color: #fff;
+	background-color: var(--lpurple);
+}
+.btns .delete {
+	margin-left: 0.3rem;
+	background-color: var(--del);
+}
+
+/* Form actions */
+.form-actions {
+	background-color: var(--secondary-bg);
+	padding: 1.5rem 2rem;
+}
+.form-actions > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 950px;
+	margin: 0 auto;
 }
 
 @media (min-width: 1200px) {
@@ -95,7 +186,7 @@ main {
 
 @media (max-width: 768px) {
 	main {
-		padding: 2rem 2rem 3rem;
+		padding: 2rem 2rem 2rem;
 	}
 	.h {
 		display: none;
@@ -103,6 +194,18 @@ main {
 }
 @media (max-width: 425px) {
 	main {
-		padding: 2rem 1rem 2rem;
+		padding: 2rem 1rem 2rem !important;
+	}
+	.status {
+		padding: 0.75rem 0.7rem;
+	}
+	.form-actions {
+		padding: 1.2rem 1rem;
+	}
+	.form-actions .draft {
+		text-transform: capitalize;
+	}
+	.form-actions span {
+		display: none;
 	}
 }

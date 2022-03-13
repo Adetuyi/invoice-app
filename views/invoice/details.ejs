@@ -1,34 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Head -->
+<!-- Header -->
 <%- include('../partials/head.ejs') %> 
+<head>
+    <link rel="stylesheet" href="/styles/detailsStyles.css">
+    <script src="/scripts/delete.js" defer></script>
+</head>
 
 <body>
     <!-- Navbar -->
     <%- include('../partials/nav.ejs') %>
-    <p>
-        <%= invoice.client.name %>
-        <br>
-        <%= invoice.invoice.date %>
-    </p>
-    <a href="/new-invoice?id=<%= invoice._id %>">edit</a>
-    <button>edit</button>
-    <button id="delete" data-for="<%= invoice._id %> ">delete</button>
 
-    <script>
-        const deleteBtn = document.querySelector('#delete');
+    <main>
+        <a href="/" class="back">
+            <img src="/svgs/arrow-left.svg" alt="arrow left">
+            <span>Go back</span>
+        </a>
 
-        deleteBtn.addEventListener('click', (e) => {
-            const id = e.currentTarget.dataset.for;
-            const endpoint = `/invoice/${id}`;
+        <header>
+            <div>
+                <p class="g">Status</p>
 
-            fetch(endpoint, {method: 'DELETE'})
-                .then((res) => res.json())
-                .then((data) => {
-                    window.location = data.redirect;
-                })
-                .catch((err) => console.log(err))
-        })
-    </script>
+                <div class="status <%= invoice.status %>">
+                    <span></span>
+                    <%= invoice.status %>
+                </div>
+            </div>
+            <div class="btns">
+                <a href="/new-invoice?id=<%= invoice._id %>">
+                    <button>Edit</button>
+                </a>                
+                <button data-for="<%= invoice._id %>" class="delete">Delete</button>
+                <% if (invoice.status ==='pending' ) { %>
+                    <button data-for="<%= invoice._id %>" class="purple mark-paid">Mark as paid</button>
+                <% } %>
+            </div>
+        </header>
+
+        <section class="invoice">
+            <div class="mb">
+                <div>
+                    <p class="inv-num">
+                        <span class="hash">#</span>ABCDE
+                    </p>
+                    <p class="s g"><%= invoice.invoice.description || 'No description added'%></p>
+                </div>
+
+                <div class="s g address addr">
+                    <p>
+                        <%= invoice.from.address || 'Sender address has not been entered' %>
+                    </p>
+                    <p>
+                        <%= invoice.from.city %>
+                    </p>
+                    <p>
+                        <%= invoice.from.postCode %>
+                    </p>
+                    <p>
+                        <%= invoice.from.country %>
+                    </p>
+                </div>
+
+            </div>
+            <div>
+                <div class="group">
+                    <div>
+                        <div class="inv-date">
+                            <div class="head">Invoice Date</div>
+                            <p><%= invoice.invoice.formattedInvDate || 'No date selected' %></p>
+                        </div>
+
+                        <div>
+                            <div class="head">Payment Due</div>
+                            <p>
+                                <%= invoice.invoice.formattedDueDate || 'No date selected' %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="head">Bill to</div>
+                        <p class="c-name">
+                            <%= invoice.client.name || 'Not Entered' %>
+                        </p>
+
+                        <div class="s g addr">
+                            <p>
+                                <%= invoice.client.address || 'Client address has not been entered' %>
+                            </p>
+                            <p>
+                                <%= invoice.client.city %>
+                            </p>
+                            <p>
+                                <%= invoice.client.postCode %>
+                            </p>
+                            <p>
+                                <%= invoice.client.country %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="head">Sent to</div>
+                    <div><%= invoice.client.email|| 'Email not entered' %></div>
+                </div>
+            </div>
+            <div class="items">
+                <div class="list">
+                    <div class="head s">
+                        <p>Item Name</p>
+                        <p>Qty</p>
+                        <p>Price</p>
+                        <p>Total</p>
+                    </div>
+                    <% if(invoice.items[0].name || invoice.items[1].name) { %>
+                        <% invoice.items.forEach(item=> {%>
+                            <% if(!item.name) return %>
+                                <div class="item">
+                                    <div>
+                                        <p>
+                                            <%= item.name %>
+                                        </p>
+                                        <p class="g hidden">
+                                            <%= item.qty %> x $ <%= item.price %>
+                                        </p>
+                                    </div>
+                                    <p class="h">
+                                        <%= item.qty %>
+                                    </p>
+                                    <p class="h">$ <%= item.price %>
+                                    </p>
+                                    <p>$ <%= item.qty * item.price %>
+                                    </p>
+                        
+                                </div>
+                        <% }) %>
+                    <% } else {%>
+                        <p class="no-item">No item has been added</p>
+                    <% } %>
+                    
+                </div>
+                <div class="amount">
+                    <% if(invoice.invoice.total) { %>
+                        <p>Amount Due</p>
+                        <p class="total">$ <%= invoice.invoice.total %>
+                        </p>
+                    <% } else {%>
+                        <p class="no-total">No total calculated</p>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="form-actions btns">
+        <div>
+            <div></div>
+    
+            <div class="btns">
+                <a href="/new-invoice?id=<%= invoice._id %>">
+                    <button>Edit</button>
+                </a>
+                <button data-for="<%= invoice._id %>" class="delete">Delete</button>
+                <% if (invoice.status === 'pending') { %>
+                    <button data-for="<%= invoice._id %>" class="purple mark-paid">Mark as paid</button>
+                <% } %>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

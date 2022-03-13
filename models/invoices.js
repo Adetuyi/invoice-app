@@ -7,77 +7,39 @@ const invoiceSchema = mongoose.Schema(
 			required: true,
 		},
 		from: {
-			address: {
-				type: String,
-				required: true,
-			},
-			city: {
-				type: String,
-				required: true,
-			},
-			postCode: {
-				type: String,
-				required: true,
-			},
-			country: {
-				type: String,
-				required: true,
-			},
+			address: String,
+			city: String,
+			postCode: String,
+			country: String,
 		},
 		client: {
-			name: {
-				type: String,
-				required: true,
-			},
-			email: {
-				type: String,
-				required: true,
-			},
-			address: {
-				type: String,
-				required: true,
-			},
-			city: {
-				type: String,
-				required: true,
-			},
-			postCode: {
-				type: String,
-				required: true,
-			},
-			country: {
-				type: String,
-				required: true,
-			},
+			name: String,
+			email: String,
+			address: String,
+			city: String,
+			postCode: String,
+			country: String,
 		},
 		invoice: {
-			date: {
-				type: String,
-				required: true,
-			},
-			term: {
-				type: Number,
-				required: true,
-			},
-			description: {
-				type: String,
-				required: true,
-			},
+			invDate: String,
+			formattedInvDate: String,
+			formattedDueDate: String,
+			terms: Number,
+			description: String,
+			total: Number,
 		},
-		items: {
-			name: {
-				type: String,
-				required: true,
+		items: [
+			{
+				name: String,
+				qty: Number,
+				price: Number,
 			},
-			qty: {
-				type: Number,
-				required: true,
+			{
+				name: String,
+				qty: Number,
+				price: Number,
 			},
-			price: {
-				type: Number,
-				required: true,
-			},
-		},
+		],
 	},
 	{ timestamps: true }
 );

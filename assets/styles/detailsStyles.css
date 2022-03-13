@@ -1,0 +1,166 @@
+.s,
+.head {
+	font-size: 0.77rem;
+}
+.g {
+	font-weight: 400;
+}
+.mb {
+	margin-bottom: 1.5rem;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--secondary-bg);
+	border-radius: 5px;
+	margin: 2rem 0 1rem;
+	padding: 1.5rem 2rem;
+}
+header > div:first-child {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.invoice {
+	background-color: var(--secondary-bg);
+	border-radius: 5px;
+	font-size: 0.9rem;
+	padding: 1.5rem 2rem;
+	line-height: 1.4;
+}
+.invoice > div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.inv-num {
+	margin-bottom: 0.4rem;
+}
+.head {
+	color: var(--secondary-clr);
+	margin-bottom: 0.4rem;
+}
+.address {
+	text-align: right;
+}
+.addr {
+	max-width: 25ch;
+}
+.group {
+	display: flex;
+	justify-content: space-between;
+	gap: 3rem;
+	width: 60%;
+}
+.group > div:first-child {
+	min-width: max-content;
+}
+.inv-date {
+	margin-bottom: 2rem;
+}
+.c-name {
+	margin-bottom: 1rem;
+}
+.items {
+	display: block !important;
+	background-color: #252945;
+	border-radius: 8px;
+	overflow: hidden;
+	margin-top: 3rem;
+}
+.list,
+.amount {
+	padding: 1.2rem 2rem;
+}
+.list {
+	font-size: 0.8rem;
+}
+.list > div {
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+.item {
+	padding: 0.4rem 0;
+}
+.list .g {
+	font-size: 0.7rem;
+	margin-top: 0.2rem;
+}
+.list .head {
+	margin-bottom: 0.7rem;
+}
+.list > div > *:nth-child(1) {
+	flex: 1;
+	text-align: left;
+}
+.list > div > *:nth-child(4) {
+	width: 50px;
+	min-width: max-content;
+	text-align: right;
+}
+.list > div > *:nth-child(3) {
+	width: 150px;
+	min-width: max-content;
+}
+.no-item {
+	width: 100%;
+	text-align: center;
+}
+.amount {
+	background-color: #0c0e16;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.8rem;
+}
+.total {
+	font-size: 1.2rem;
+}
+.no-total {
+	width: 100%;
+	text-align: center;
+	font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+	header .btns {
+		display: none;
+	}
+	header > div:first-child {
+		width: 100%;
+		justify-content: space-between;
+	}
+	.invoice > div {
+		flex-direction: column;
+	}
+	.address {
+		text-align: left;
+		margin: 1.9rem 0 0.7rem;
+	}
+	.group {
+		width: 100%;
+		margin-bottom: 2rem;
+	}
+	.list .head {
+		display: none;
+	}
+	.list .hidden {
+		display: block;
+	}
+}
+
+@media (min-width: 425px) {
+	.form-actions {
+		display: none;
+	}
+}
+@media (max-width: 425px) {
+	.group {
+		flex-direction: column;
+		gap: 1rem;
+	}
+}
