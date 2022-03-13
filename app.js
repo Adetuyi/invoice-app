@@ -13,13 +13,14 @@ app.use(express.static('assets'));
 app.use(express.urlencoded({ extended: true }));
 
 const uri = process.env.DB_URI;
+const port = process.env.PORT || 3000;
 
 // Connect to MongoDb
 mongoose
 	.connect(uri)
 	.then((result) => {
 		console.log('connected to db');
-		app.listen(3000);
+		app.listen(port);
 	})
 	.catch((err) => {
 		console.log(err);
