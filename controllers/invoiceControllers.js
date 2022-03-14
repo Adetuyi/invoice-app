@@ -40,7 +40,7 @@ const invoice_create_get = (req, res) => {
 // Create new invoice
 const invoice_post = (req, res) => {
 	const body = req.body;
-	const invDate = new Date(body.inv_date);
+	let invDate = new Date(body.inv_date);
 	let formattedInvDate = '';
 	let dueDate = '';
 	let formattedDueDate = '';
@@ -49,11 +49,15 @@ const invoice_post = (req, res) => {
 		formattedInvDate = moment(invDate).format('DD MMM YYYY');
 		dueDate = invDate.setDate(invDate.getDate() + parseInt(body.terms));
 		formattedDueDate = moment(dueDate).format('DD MMM YYYY');
+	} else {
+		invDate = '';
 	}
 
 	const total = body.price_one * body.qty_one + body.price_two * body.qty_two;
 
 	const status = body.status === 'draft' ? 'draft' : 'pending';
+
+	console.log(status, invDate);
 
 	const invoice = new Invoice({
 		status,
@@ -160,6 +164,7 @@ const invoice_edit = (req, res) => {
 	const total = body.price_one * body.qty_one + body.price_two * body.qty_two;
 
 	const invoice = {
+		status: 'pending',
 		from: {
 			address: body.from_address,
 			city: body.from_city,

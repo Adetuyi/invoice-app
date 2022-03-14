@@ -49,7 +49,11 @@
         <div class="group">
             <div class="inp-group">
                 <label for="inv_date">Invoice Date</label>
-                <input type="date" name="inv_date" value="<%= invoice.invoice.invDate %>" readonly>
+                <% if (invoice.invoice.invDate) { %>
+                    <input type="date" name="inv_date" id="date" value="<%= invoice.invoice.invDate %>" readonly>
+                <% } else { %>
+                    <input type="date" name="inv_date" id="date" value="<%= invoice.invoice.invDate %>" required>
+                <% } %> 
             </div>
 
             <div class="inp-group">
